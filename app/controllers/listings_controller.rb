@@ -2,9 +2,11 @@ class ListingsController < ApplicationController
   before_action :authenticate_user!
 
   def index
+    @listings = current_user.listings
   end
 
   def show
+    @listing = Listing.find(params[:id])
   end
 
   def new
@@ -25,9 +27,13 @@ class ListingsController < ApplicationController
   end
 
   def update
+    @listing = Listing.find(params[:id])
+    @listing.update(listing_params)
+    render :show , notice: "更新できました"
   end
 
   def basics
+    @listing = Listing.find(params[:id])
   end
 
   private
