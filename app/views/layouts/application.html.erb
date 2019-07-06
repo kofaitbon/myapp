@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Myapp</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <header>
+      <nav class="navbar navbar-light bg-light">
+        <a href="/" class="navbar-brand" style="font-weight:bold; font-family: sans-serif;">LESSON</a>
+        <button class="navbar-toggler" type="button"
+            data-toggle="collapse"
+            data-target="#navmenu1"
+            aria-controls="navmenu1"
+            aria-expanded="false"
+            aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navmenu1">
+          <div class="navbar-nav">
+            <% if (!user_signed_in? )%>
+              <li><%= link_to("ログイン", user_session_path )%></li>
+              <li><%= link_to("アカウント作成", new_user_registration_path ) %></li>
+            <% else %>
+              <li><%= current_user.email %></li>
+              <li><%= link_to("シッターになる", "#" )%></li>
+              <li><%= link_to("ログアウト", destroy_user_session_path, method: :delete )%></li>
+            <% end %>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+
+    <%= yield %>
+    <p class="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p>
+  </body>
+</html>
