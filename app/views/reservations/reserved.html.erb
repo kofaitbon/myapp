@@ -1,0 +1,32 @@
+  <div class="container">
+    <div class="col-md-10 offset-1">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <div class="text-center">
+            <span style="font-size:18px;">シッター予定</span>
+          </div>
+        </div>
+        <ul class="ul-unstyled">
+          <% @listings.each do |listing| %>
+            <% listing.reservations.each do |reservation| %>
+              <% if reservation.self_booking == nil %>
+                <li class="panel-body">
+                  <div class="row-table">
+
+                    <div class="col-sm-7 col-lg-7 col-middle row-space-2">
+                      <span class="listing-title"><%= listing.listing_title %></span>
+                    </div>
+
+                    <div class="col-md-2 col-sm-2 col-xs-10 col-middle row-space-2">
+                      <%= reservation.start_date.strftime('%Y年%m月%d日〜') %>
+                    </div>
+
+                </div>
+              </li>
+            <% end %>
+          <% end %>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+  </div>
